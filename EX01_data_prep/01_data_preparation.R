@@ -1,5 +1,5 @@
 getwd()
-setwd("C:\\Users\\user\\Documents\\R_A_Z\\Advanced")
+setwd("C:/Users/user/Documents/GitHub/R-Bootcamp/EX01_data_prep")
 getwd()
 
 path = "P3-Future-500-The-Dataset.csv"
@@ -9,6 +9,8 @@ head(fin, 10)
 tail(fin, 10)
 str(fin)
 summary(fin)
+# num.cols <- sapply(fin, is.numeric)
+# cor(fin[,col_nums])
 
 fin$ID <- factor(fin$ID)
 fin$Inception <- factor(fin$Inception)
@@ -37,9 +39,16 @@ typeof(x)
 head(fin)
 str(fin)
 
-for (x in names(fin)){
-  print(x)
-}
+
+# colnames(fin)
+# factor.cols <- c("Name", "Industry", "State", "City", 
+#                  "Revenue", "Expenses", "Growth")
+# 
+# for (x in factor.cols ){
+#   fin[,x] <- factor(fin[,x])
+# }
+# str(fin)
+# summary(fin)
 
 # sub and gsub
 fin$Expenses <- gsub(" Dollars", "", fin$Expenses)
@@ -80,7 +89,7 @@ fin[fin$Employees==45,]
 fin[which(fin$Employees==45),]
 
 # Filtering: using is.na() for missing data
-fin$Expenses == NA
+# fin$Expenses == NA
 fin[fin$Expenses == NA,]
 
 # removing
@@ -95,10 +104,14 @@ rownames(fin) <- NULL
 # Replacing Missing
 fin[!complete.cases(fin),]
 
+fin[is.na(fin$Industry),]
+fin[is.na(fin), ]
+
 med_empl_retail <- median(fin[fin$Industry=="Retail","Employees"],
                           na.rm=TRUE)
 med_empl_retail
 
+fin[is.na(fin$Employees) ,]
 fin[is.na(fin$Employees) & fin$Industry=="Retail",]
 fin[is.na(fin$Employees) & fin$Industry=="Retail","Employees"] <- med_empl_retail
 
